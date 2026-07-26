@@ -23,7 +23,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['ChromeHeadless'],   // ✅ use headless mode for Jenkins
-    singleRun: false,
+    singleRun: true,
     restartOnFileChange: true
   });
 };
