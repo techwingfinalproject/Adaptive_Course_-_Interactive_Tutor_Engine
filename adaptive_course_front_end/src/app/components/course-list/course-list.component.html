@@ -1,0 +1,38 @@
+<div class="courses-wrapper">
+  <div class="page-header">
+    <h2>Available Courses</h2>
+    <p class="subtitle">Discover our catalog and start learning today.</p>
+  </div>
+  
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="courses.length === 0 && !errorMessage" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading courses...</p>
+  </div>
+  
+  <div class="course-grid">
+    <div *ngFor="let course of courses" class="course-card glass-panel">
+      <div class="course-thumbnail" [ngStyle]="{'background-image': 'url(' + (course.thumbnail || 'assets/placeholder-course.jpg') + ')'}">
+        <span class="course-code badge">{{ course.courseCode }}</span>
+      </div>
+      <div class="course-content">
+        <h3>{{ course.courseName }}</h3>
+        <p class="description">{{ course.description | slice:0:100 }}{{ course.description?.length > 100 ? '...' : '' }}</p>
+        <div class="course-meta">
+          <span class="duration" *ngIf="course.duration">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            {{ course.duration }} weeks
+          </span>
+          <span class="teacher" *ngIf="course.teacher">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            {{ course.teacher.fullName }}
+          </span>
+        </div>
+        <button class="btn-primary mt-3 w-100" (click)="enroll(course.courseId)">Enroll Now</button>
+      </div>
+    </div>
+  </div>
+</div>

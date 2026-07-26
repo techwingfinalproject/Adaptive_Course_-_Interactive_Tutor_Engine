@@ -1,0 +1,22 @@
+<div class="logo-container" [style.gap.px]="size * 0.3">
+  <svg 
+    [attr.width]="size" 
+    [attr.height]="size" 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    xmlns="http://www.w3.org/2000/svg"
+    class="logo-icon"
+  >
+    <!-- Background rounded shape -->
+    <rect width="24" height="24" rx="6" fill="var(--color-primary)" />
+    <!-- Graduation Cap / Book Path -->
+    <path d="M12 5L4 9L12 13L20 9L12 5Z" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6 10.5V14.5C6 15.5 8.7 17.5 12 17.5C15.3 17.5 18 15.5 18 14.5V10.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  
+  @if (showText) {
+    <span class="logo-text" [class.dark]="darkText" [style.font-size.rem]="size * 0.045">
+      Tutor<span class="logo-text-accent">Engine</span>
+    </span>
+  }
+</div>

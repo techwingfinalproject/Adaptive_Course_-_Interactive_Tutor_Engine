@@ -1,0 +1,174 @@
+<div class="dashboard-container animate-fade-in">
+  <!-- Welcome Banner -->
+  <div class="welcome-banner">
+    <div class="welcome-text-group">
+      <h1>Welcome back, {{ authService.currentUser()?.name }}! 👋</h1>
+      <p>Let's continue your learning journey. You're doing great!</p>
+    </div>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    <div class="card stat-card">
+      <div class="stat-icon-wrapper blue">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3.5A2.5 2.5 0 0 1 6.5 1H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+      </div>
+      <div class="stat-content">
+        <span class="stat-label">Courses Enrolled</span>
+        <h2 class="stat-val">{{ courseService.courses().length }}</h2>
+      </div>
+    </div>
+
+    <div class="card stat-card">
+      <div class="stat-icon-wrapper green">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <div class="stat-content">
+        <span class="stat-label">Lessons Completed</span>
+        <h2 class="stat-val">{{ lessonsCompleted() }}</h2>
+      </div>
+    </div>
+
+    <div class="card stat-card">
+      <div class="stat-icon-wrapper warning">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+      </div>
+      <div class="stat-content">
+        <span class="stat-label">Quizzes Taken</span>
+        <h2 class="stat-val">18</h2>
+      </div>
+    </div>
+
+    <div class="card stat-card">
+      <div class="stat-icon-wrapper purple">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      </div>
+      <div class="stat-content">
+        <span class="stat-label">Average Score</span>
+        <h2 class="stat-val">78%</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress and Recommendations Layout Grid -->
+  <div class="dashboard-main-grid">
+    <!-- Overall Progress Card -->
+    <div class="card progress-card">
+      <h3 class="card-title">Your Progress</h3>
+      
+      <div class="progress-details">
+        <div class="circular-progress-section">
+          <app-progress-ring 
+            [progress]="overallProgress()" 
+            [size]="130" 
+            [strokeWidth]="10"
+            subtitle="Overall Progress"
+          ></app-progress-ring>
+        </div>
+
+        <div class="course-progress-list">
+          @for (course of courseService.courses(); track course.id) {
+            <div class="course-prog-item">
+              <div class="course-prog-info">
+                <span class="course-prog-name">{{ course.title }}</span>
+                <span class="course-prog-pct">{{ course.progress }}%</span>
+              </div>
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" [style.width.%]="course.progress"></div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      <div class="progress-card-footer">
+        <a routerLink="/courses" class="btn-text">View all progress →</a>
+      </div>
+    </div>
+
+    <!-- AI Recommendation Card -->
+    <div class="card recommendation-card">
+      <div class="recommendation-content">
+        <div class="recommendation-header">
+          <span class="badge badge-warning">AI Recommendation</span>
+          <h3 class="card-title mt-xs">Focus on Database Normalization</h3>
+        </div>
+        
+        <p class="recommendation-desc">
+          You seemed to find this topic challenging in your quizzes. Shall we help you with some customized learning material?
+        </p>
+
+        <div class="recommendation-actions">
+          <a routerLink="/ai-tutor" class="btn btn-primary">Review Now</a>
+        </div>
+      </div>
+      
+      <div class="recommendation-illustration">
+        <!-- AI Robot Graphic (SVG Inline) -->
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" width="90" height="90">
+          <circle cx="60" cy="60" r="50" fill="var(--color-primary-light)" />
+          <!-- Robot head -->
+          <rect x="35" y="45" width="50" height="35" rx="10" fill="var(--color-primary)" />
+          <rect x="42" y="52" width="36" height="21" rx="5" fill="#FFFFFF" />
+          <!-- Robot eyes -->
+          <circle cx="51" cy="62" r="4" fill="var(--color-primary)" />
+          <circle cx="69" cy="62" r="4" fill="var(--color-primary)" />
+          <!-- Robot mouth -->
+          <path d="M55 68 H65" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" />
+          <!-- Ears / Antenna -->
+          <rect x="30" y="55" width="5" height="15" rx="2" fill="var(--color-primary)" />
+          <rect x="85" y="55" width="5" height="15" rx="2" fill="var(--color-primary)" />
+          <circle cx="60" cy="35" r="4" fill="var(--color-warning)" />
+          <line x1="60" y1="39" x2="60" y2="45" stroke="var(--color-primary)" stroke-width="3" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Grid: Continue Learning and Recent Activity -->
+  <div class="dashboard-bottom-grid">
+    <!-- Continue Learning -->
+    <div class="card continue-card">
+      <h3 class="card-title">Continue Learning</h3>
+      
+      <div class="continue-content">
+        <div class="continue-course-logo">
+          <!-- Database Icon SVG -->
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
+        </div>
+        
+        <div class="continue-details">
+          <h4>Database Systems</h4>
+          <p>Normalization and Functional Dependencies</p>
+          <div class="continue-progress-row">
+            <div class="progress-bar-bg flex-1">
+              <div class="progress-bar-fill" style="width: 50%"></div>
+            </div>
+            <span class="text-sm font-semibold">50%</span>
+          </div>
+        </div>
+
+        <a routerLink="/courses/dbms" class="btn btn-primary continue-btn">Continue</a>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="card activity-card">
+      <h3 class="card-title">Recent Activity</h3>
+      
+      <div class="activity-list">
+        @for (activity of recentActivity; track activity.text) {
+          <div class="activity-item">
+            <div class="activity-bullet" [class.quiz]="activity.type === 'quiz'"></div>
+            <div class="activity-details">
+              <p class="activity-text">{{ activity.text }}</p>
+              <span class="activity-time">{{ activity.date }}</span>
+            </div>
+            @if (activity.score) {
+              <span class="activity-score">{{ activity.score }}</span>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

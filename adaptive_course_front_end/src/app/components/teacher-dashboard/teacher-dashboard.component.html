@@ -1,0 +1,48 @@
+<div class="dashboard-header">
+  <h1>Teacher Dashboard</h1>
+  <p class="subtitle">Welcome back, {{ teacherName }}! Manage your courses and track student progress.</p>
+</div>
+
+<div class="dashboard-grid">
+  <!-- Manage Courses Card -->
+  <div class="dashboard-card glass-panel">
+    <h3><mat-icon>menu_book</mat-icon> Manage Courses</h3>
+    
+    <div class="action-bar">
+      <button mat-raised-button color="primary" routerLink="/teacher/courses/new">
+        <mat-icon>add</mat-icon> Create New Course
+      </button>
+    </div>
+
+    <div *ngIf="loading" class="loading-state">
+      <mat-spinner diameter="30"></mat-spinner>
+    </div>
+    <div *ngIf="!loading && myCourses.length === 0" class="empty-state">
+      <p>You haven't created any courses yet.</p>
+    </div>
+    
+    <mat-list *ngIf="!loading && myCourses.length > 0">
+      <mat-list-item *ngFor="let course of myCourses" (click)="manageCourse(course.courseId)" class="clickable-item">
+        <mat-icon matListItemIcon>edit</mat-icon>
+        <div matListItemTitle>{{ course.courseName }}</div>
+        <div matListItemLine>{{ course.duration }} weeks</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <!-- Student Progress & Results -->
+  <div class="dashboard-card glass-panel">
+    <h3><mat-icon>bar_chart</mat-icon> Student Performance</h3>
+    <p>View aggregated quiz results and progress for your students.</p>
+    <button mat-stroked-button color="primary">View Analytics</button>
+  </div>
+  
+  <!-- Quick Actions -->
+  <div class="dashboard-card glass-panel">
+    <h3><mat-icon>settings</mat-icon> Quick Actions</h3>
+    <div class="action-buttons">
+      <button mat-stroked-button color="primary" routerLink="/teacher/profile">Edit Profile</button>
+      <button mat-stroked-button color="accent">View Notifications</button>
+    </div>
+  </div>
+</div>

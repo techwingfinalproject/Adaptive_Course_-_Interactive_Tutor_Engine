@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.company</groupId>
+  <artifactId>adaptive-tutor-engine</artifactId>
+  <version>${build.number}</version>
+  <packaging>war</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>1.12.1</version>
+        <configuration>
+          <nodeVersion>v24.15.0</nodeVersion>
+          <npmVersion>10.5.2</npmVersion>
+        </configuration>
+        <executions>
+          <execution><id>install node and npm</id><goals><goal>install-node-and-npm</goal></goals></execution>
+          <execution><id>npm install</id><goals><goal>npm</goal></goals></execution>
+          <execution><id>npm run build</id><goals><goal>npm</goal></goals><configuration><arguments>run build --configuration production</arguments></configuration></execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.3.2</version>
+        <configuration>
+          <warSourceDirectory>dist/adaptive-tutor-engine</warSourceDirectory>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

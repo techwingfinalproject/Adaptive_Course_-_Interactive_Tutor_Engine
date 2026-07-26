@@ -1,0 +1,41 @@
+<div class="dashboard-header">
+  <h1>Student Dashboard</h1>
+  <p class="subtitle">Welcome back! Here is your learning overview.</p>
+</div>
+
+<div class="dashboard-grid">
+  <!-- Enrolled Courses Card -->
+  <div class="dashboard-card glass-panel">
+    <h3><mat-icon>school</mat-icon> My Courses</h3>
+    <div *ngIf="loading" class="loading-state">
+      <mat-spinner diameter="30"></mat-spinner>
+    </div>
+    <div *ngIf="!loading && enrollments.length === 0" class="empty-state">
+      <p>You haven't enrolled in any courses yet.</p>
+      <button mat-button color="primary" routerLink="/courses">Browse Courses</button>
+    </div>
+    <mat-list *ngIf="!loading && enrollments.length > 0">
+      <mat-list-item *ngFor="let enrollment of enrollments" (click)="goToCourse(enrollment.course.courseId)" class="clickable-item">
+        <mat-icon matListItemIcon>book</mat-icon>
+        <div matListItemTitle>{{ enrollment.course.courseName }}</div>
+        <div matListItemLine>Status: {{ enrollment.status }}</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <!-- AI Recommendations Card -->
+  <div class="dashboard-card glass-panel">
+    <h3><mat-icon>auto_awesome</mat-icon> AI Recommendations</h3>
+    <p>Based on your progress, our AI suggests you review the following topics:</p>
+    <button mat-raised-button color="primary" routerLink="/ai-agent">Ask AI Agent</button>
+  </div>
+  
+  <!-- Quick Actions -->
+  <div class="dashboard-card glass-panel">
+    <h3><mat-icon>bolt</mat-icon> Quick Actions</h3>
+    <div class="action-buttons">
+      <button mat-stroked-button color="primary" routerLink="/student/profile">Edit Profile</button>
+      <button mat-stroked-button color="accent" routerLink="/student/notifications">View Notifications</button>
+    </div>
+  </div>
+</div>

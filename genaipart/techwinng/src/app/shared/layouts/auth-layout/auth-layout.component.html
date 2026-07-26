@@ -1,0 +1,81 @@
+<div class="auth-wrapper">
+  <!-- Left Side: Hero Section -->
+  <div class="auth-hero">
+    <div class="hero-content">
+      <!-- Minimalist Logo -->
+      <div class="hero-logo">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="24" height="24" rx="6" fill="#FFFFFF" />
+          <path d="M12 5L4 9L12 13L20 9L12 5Z" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 10.5V14.5C6 15.5 8.7 17.5 12 17.5C15.3 17.5 18 15.5 18 14.5V10.5" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="hero-logo-text">TutorEngine</span>
+      </div>
+
+      <div class="hero-text">
+        <h1>Learn Smarter.<br>Achieve Better.</h1>
+        <p>Adaptive learning with AI guidance for your success.</p>
+      </div>
+
+      <!-- Inline SVG Student Illustration -->
+      <div class="hero-illustration">
+        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="auto">
+          <!-- Background glow -->
+          <circle cx="200" cy="150" r="100" fill="rgba(255, 255, 255, 0.08)" />
+          
+          <!-- Laptop/Desk -->
+          <rect x="100" y="220" width="200" height="10" rx="3" fill="#DCDCDC" opacity="0.3"/>
+          <rect x="130" y="160" width="140" height="80" rx="4" fill="#1F2937"/>
+          <rect x="138" y="168" width="124" height="64" fill="#0147AD" opacity="0.8"/>
+          <rect x="180" y="240" width="40" height="15" fill="#9CA3AF"/>
+          <ellipse cx="200" cy="255" rx="35" ry="5" fill="#4B5563"/>
+          
+          <!-- Student figure -->
+          <path d="M170 180 C150 180 140 210 140 240 L260 240 C260 210 250 180 230 180 Z" fill="#6B7280" opacity="0.9"/>
+          <circle cx="200" cy="140" r="22" fill="#FBCFE8"/> <!-- Head -->
+          <!-- Hair -->
+          <path d="M185 125 C190 120 210 120 215 125 C222 130 220 145 220 145 C220 145 210 135 200 135 C190 135 180 145 180 145 Z" fill="#111827"/>
+          <!-- Smile/Eyes -->
+          <circle cx="193" cy="140" r="1.5" fill="#111827"/>
+          <circle cx="207" cy="140" r="1.5" fill="#111827"/>
+          <path d="M197 148 Q200 152 203 148" stroke="#111827" stroke-width="1.5" stroke-linecap="round"/>
+          
+          <!-- Floating elements (education tags) -->
+          <!-- Book -->
+          <g transform="translate(60, 80) rotate(-15)">
+            <rect width="45" height="30" rx="3" fill="#FFFFFF" />
+            <rect x="4" y="4" width="37" height="2" fill="var(--color-primary)" />
+            <rect x="4" y="10" width="25" height="2" fill="#E5E7EB" />
+            <rect x="4" y="16" width="30" height="2" fill="#E5E7EB" />
+            <rect x="4" y="22" width="20" height="2" fill="#E5E7EB" />
+          </g>
+          
+          <!-- Graph/Analytics -->
+          <g transform="translate(290, 90) rotate(10)">
+            <rect width="50" height="40" rx="6" fill="#FFFFFF" />
+            <path d="M10 30 L20 20 L30 25 L40 10" stroke="var(--color-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="40" cy="10" r="3" fill="var(--color-success)"/>
+          </g>
+          
+          <!-- AI Brain/Chat Bubble -->
+          <g transform="translate(280, 180)">
+            <rect width="60" height="35" rx="12" fill="#22C55E" />
+            <path d="M295 215 L295 225 L305 215 Z" fill="#22C55E" />
+            <text x="30" y="22" fill="#FFFFFF" font-size="10" font-weight="bold" text-anchor="middle">AI Help</text>
+          </g>
+
+          <!-- Lightbulb (ideas) -->
+          <g transform="translate(90, 170)">
+            <circle cx="15" cy="15" r="15" fill="#F59E0B"/>
+            <path d="M15 8 V22 M8 15 H22" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Side: Content Area (RouterOutlet) -->
+  <div class="auth-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

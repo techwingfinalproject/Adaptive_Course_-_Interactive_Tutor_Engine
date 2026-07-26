@@ -1,0 +1,40 @@
+<div class="creator-wrapper">
+  <div class="creator-container glass-panel">
+    <h2>Create New Course</h2>
+    <p class="subtitle">Fill out the details below to start a new course.</p>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+    <form (ngSubmit)="createCourse()" class="creator-form">
+      <div class="form-group">
+        <label for="courseName">Course Name</label>
+        <input type="text" id="courseName" [(ngModel)]="courseData.courseName" name="courseName" class="input-field" placeholder="e.g. Advanced Mathematics" required>
+      </div>
+
+      <div class="form-group">
+        <label for="courseCode">Course Code</label>
+        <input type="text" id="courseCode" [(ngModel)]="courseData.courseCode" name="courseCode" class="input-field" placeholder="e.g. MATH301" required>
+      </div>
+
+      <div class="form-group">
+        <label for="duration">Duration (hours)</label>
+        <input type="number" id="duration" [(ngModel)]="courseData.duration" name="duration" class="input-field" placeholder="e.g. 40" required>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" [(ngModel)]="courseData.description" name="description" class="input-field" rows="4" placeholder="What is this course about?" required></textarea>
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="loading">
+        <span *ngIf="!loading">Create Course</span>
+        <span *ngIf="loading">Creating...</span>
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,116 @@
+<div class="result-container animate-fade-in">
+  @if (result(); as res) {
+    <!-- Score Breakdown Summary -->
+    <div class="card result-card">
+      <div class="result-split">
+        <!-- Score Circular Ring -->
+        <div class="score-circle-panel">
+          <app-progress-ring 
+            [progress]="res.score" 
+            [size]="150" 
+            [strokeWidth]="12"
+            strokeColor="var(--color-primary)"
+            subtitle="Your Score"
+          ></app-progress-ring>
+          
+          <div class="feedback-text mt-md">
+            <h3>Excellent! 🎉</h3>
+            <p>{{ feedbackMessage() }}</p>
+          </div>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="metrics-panel">
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <span class="m-lbl">Total Questions</span>
+              <h3 class="m-val">{{ res.totalQuestions }}</h3>
+            </div>
+            
+            <div class="metric-card success">
+              <span class="m-lbl">Correct Answers</span>
+              <h3 class="m-val">{{ res.correctAnswers }}</h3>
+            </div>
+            
+            <div class="metric-card error">
+              <span class="m-lbl">Wrong Answers</span>
+              <h3 class="m-val">{{ res.wrongAnswers }}</h3>
+            </div>
+            
+            <div class="metric-card">
+              <span class="m-lbl">Time Taken</span>
+              <h3 class="m-val">{{ res.timeTaken }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Question Indicator Badges -->
+    <div class="card review-badges-card mt-md">
+      <h3 class="card-title">Question Review</h3>
+      <div class="badge-row mt-md">
+        @for (q of res.questions; track q.id; let idx = $index) {
+          <div 
+            class="badge-circle" 
+            [class.correct]="q.selectedAnswerIndex === q.correctAnswerIndex"
+            [class.wrong]="q.selectedAnswerIndex !== q.correctAnswerIndex"
+          >
+            {{ idx + 1 }}
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Questions Details Review List -->
+    <div class="questions-review-list mt-md">
+      @for (q of res.questions; track q.id; let idx = $index) {
+        <div class="card review-item-card">
+          <div class="review-header">
+            <span class="rev-num">Question {{ idx + 1 }}</span>
+            @if (q.selectedAnswerIndex === q.correctAnswerIndex) {
+              <span class="badge badge-success">Correct</span>
+            } @else {
+              <span class="badge badge-error">Incorrect</span>
+            }
+          </div>
+
+          <h3 class="review-question-text mt-sm">{{ q.text }}</h3>
+
+          <div class="review-options-list mt-md">
+            @for (opt of q.options; track opt; let optIdx = $index) {
+              <div 
+                class="review-option-row"
+                [class.correct]="optIdx === q.correctAnswerIndex"
+                [class.wrong]="optIdx === q.selectedAnswerIndex && q.selectedAnswerIndex !== q.correctAnswerIndex"
+              >
+                <div class="option-check-indicator">
+                  @if (optIdx === q.correctAnswerIndex) {
+                    <!-- Check icon -->
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  } @else if (optIdx === q.selectedAnswerIndex) {
+                    <!-- Cross icon -->
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  } @else {
+                    <span></span>
+                  }
+                </div>
+                <span class="opt-text">{{ opt }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Bottom Actions -->
+    <div class="result-actions mt-lg">
+      <a routerLink="/ai-tutor" class="btn btn-primary">
+        Ask AI Tutor
+      </a>
+      <a routerLink="/dashboard" class="btn btn-secondary">
+        Go to Dashboard
+      </a>
+    </div>
+  }
+</div>

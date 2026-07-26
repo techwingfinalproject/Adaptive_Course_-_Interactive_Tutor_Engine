@@ -1,0 +1,47 @@
+<svg viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+  <!-- Background Gradient -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0147AD" />
+      <stop offset="100%" stop-color="#001F52" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgGrad)" />
+
+  <!-- Grid Pattern overlay -->
+  <g opacity="0.05">
+    <path d="M0 50 H800 M0 100 H800 M0 150 H800 M0 200 H800 M0 250 H800 M0 300 H800 M0 350 H800 M0 400 H800" stroke="#FFFFFF" stroke-width="1" />
+    <path d="M100 0 V450 M200 0 V450 M300 0 V450 M400 0 V450 M500 0 V450 M600 0 V450 M700 0 V450" stroke="#FFFFFF" stroke-width="1" />
+  </g>
+
+  <!-- FD Relation diagram representation -->
+  <g transform="translate(150, 120)" opacity="0.8">
+    <!-- Attributes -->
+    <rect x="0" y="40" width="80" height="50" rx="8" fill="#FFFFFF" />
+    <text x="40" y="72" fill="#0147AD" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="bold" text-anchor="middle">A</text>
+    
+    <rect x="200" y="40" width="80" height="50" rx="8" fill="#FFFFFF" />
+    <text x="240" y="72" fill="#0147AD" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="bold" text-anchor="middle">B</text>
+    
+    <rect x="400" y="40" width="80" height="50" rx="8" fill="#FFFFFF" opacity="0.4" />
+    <text x="440" y="72" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="bold" text-anchor="middle">C</text>
+
+    <!-- Arrow -->
+    <path d="M90 65 H190" stroke="#22C55E" stroke-width="4" stroke-dasharray="8 4" stroke-linecap="round" />
+    <polygon points="190,60 200,65 190,70" fill="#22C55E" />
+    
+    <path d="M290 65 H390" stroke="#DCDCDC" stroke-width="2" stroke-linecap="round" />
+    <polygon points="390,61 398,65 390,69" fill="#DCDCDC" />
+
+    <text x="140" y="45" fill="#22C55E" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="bold" text-anchor="middle">FD: A → B</text>
+  </g>
+
+  <!-- Big Play Button overlay -->
+  <circle cx="400" cy="225" r="45" fill="#FFFFFF" opacity="0.15" />
+  <circle cx="400" cy="225" r="35" fill="#FFFFFF" />
+  <polygon points="390,210 420,225 390,240" fill="#0147AD" />
+
+  <!-- Video Text Details -->
+  <text x="400" y="340" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="26" font-weight="800" text-anchor="middle">Database Systems</text>
+  <text x="400" y="375" fill="#DCDCDC" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="500" text-anchor="middle">Lesson 3: Normalization &amp; Functional Dependencies</text>
+</svg>

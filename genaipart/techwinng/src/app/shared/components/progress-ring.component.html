@@ -1,0 +1,33 @@
+<div class="progress-ring-wrapper" [style.width.px]="size" [style.height.px]="size">
+  <svg [attr.width]="size" [attr.height]="size">
+    <circle
+      class="progress-ring-track"
+      fill="transparent"
+      [attr.stroke-width]="strokeWidth"
+      [attr.r]="radius()"
+      [attr.cx]="size / 2"
+      [attr.cy]="size / 2"
+    />
+    <circle
+      class="progress-ring-fill"
+      fill="transparent"
+      [attr.stroke]="strokeColor"
+      [attr.stroke-width]="strokeWidth"
+      [attr.r]="radius()"
+      [attr.cx]="size / 2"
+      [attr.cy]="size / 2"
+      [attr.stroke-dasharray]="circumference() + ' ' + circumference()"
+      [attr.stroke-dashoffset]="strokeDashoffset()"
+    />
+  </svg>
+  <div class="progress-ring-content" [style.color]="textColor">
+    <span class="progress-percent" [style.font-size.px]="size * 0.2">
+      {{ progress }}%
+    </span>
+    @if (subtitle) {
+      <span class="progress-subtitle" [style.font-size.px]="size * 0.09">
+        {{ subtitle }}
+      </span>
+    }
+  </div>
+</div>

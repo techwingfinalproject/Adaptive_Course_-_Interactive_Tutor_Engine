@@ -1,0 +1,182 @@
+<div class="lesson-container animate-fade-in">
+  @if (course(); as c) {
+    @if (activeLesson(); as l) {
+      <!-- Back Link Header -->
+      <div class="lesson-header">
+        <a [routerLink]="['/courses', c.id]" class="back-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Back to {{ c.title }}
+        </a>
+      </div>
+
+      <div class="lesson-layout-grid">
+        <!-- Left Column: Video & Tabs -->
+        <div class="video-panel">
+          <!-- Styled Video Player -->
+          <div class="player-wrapper">
+            <video 
+              [src]="l.videoUrl" 
+              controls 
+              class="video-element"
+              poster="assets/images/video-poster.svg"
+            ></video>
+            
+          </div>
+
+          <!-- Title & Actions Row -->
+          <div class="lesson-meta-row mt-md">
+            <div>
+              <h1 class="lesson-title-text">{{ l.title }}</h1>
+              <p class="course-subtitle">{{ c.title }} • {{ l.duration }}</p>
+            </div>
+            
+            <button 
+              class="btn" 
+              [class.btn-success]="l.completed"
+              [class.btn-primary]="!l.completed"
+              [disabled]="l.completed"
+              (click)="markAsComplete()"
+            >
+              @if (l.completed) {
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Completed
+              } @else {
+                Mark as Completed
+              }
+            </button>
+          </div>
+
+          <!-- Details Tabs Navigation -->
+          <div class="details-tabs-nav mt-lg">
+            <button class="tab-nav-btn" [class.active]="activeTab() === 'Overview'" (click)="setTab('Overview')">Overview</button>
+            <button class="tab-nav-btn" [class.active]="activeTab() === 'Notes'" (click)="setTab('Notes')">Notes</button>
+            <button class="tab-nav-btn" [class.active]="activeTab() === 'Resources'" (click)="setTab('Resources')">Resources</button>
+            <button class="tab-nav-btn" [class.active]="activeTab() === 'Discussion'" (click)="setTab('Discussion')">Discussion</button>
+          </div>
+
+          <!-- Tab Content Panels -->
+          <div class="card tab-content-card mt-xs">
+            @if (activeTab() === 'Overview') {
+              <div class="tab-panel animate-fade-in">
+                <h3>About this Lesson</h3>
+                <p class="mt-sm leading-relaxed">{{ l.description }}</p>
+                
+                <h4 class="mt-md">Learning Objectives</h4>
+                <ul class="bullet-list mt-sm">
+                  <li>Understand the theoretical foundations of the topic</li>
+                  <li>Identify practical applications in real-world software design</li>
+                  <li>Solve sample problems to check comprehension</li>
+                </ul>
+              </div>
+            }
+
+            @if (activeTab() === 'Notes') {
+              <div class="tab-panel animate-fade-in">
+                <h3>Lesson Cheat-Sheet & Study Notes</h3>
+                <div class="notes-block mt-sm">
+                  <pre class="pre-notes">{{ l.notes }}</pre>
+                </div>
+              </div>
+            }
+
+            @if (activeTab() === 'Resources') {
+              <div class="tab-panel animate-fade-in">
+                <h3>Downloadable Attachments</h3>
+                @if (l.resources.length > 0) {
+                  <div class="resources-list mt-sm">
+                    @for (res of l.resources; track res.name) {
+                      <div class="resource-item">
+                        <div class="res-info">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                          <div class="res-details">
+                            <span class="res-name">{{ res.name }}</span>
+                            <span class="res-type">{{ res.type }} Document</span>
+                          </div>
+                        </div>
+                        <button class="btn btn-secondary font-sm py-xs">{{ res.action }}</button>
+                      </div>
+                    }
+                  </div>
+                } @else {
+                  <p class="mt-sm text-muted">No external resources available for this lesson.</p>
+                }
+              </div>
+            }
+
+            @if (activeTab() === 'Discussion') {
+              <div class="tab-panel animate-fade-in">
+                <h3>Student Discussion Forum</h3>
+                
+                <!-- Comment submission form -->
+                <div class="comment-input-block mt-md">
+                  <textarea 
+                    class="form-input text-area" 
+                    placeholder="Ask a question or share your thoughts..."
+                    [(ngModel)]="newCommentText"
+                    rows="3"
+                  ></textarea>
+                  <div class="comment-action-row mt-sm">
+                    <button class="btn btn-primary font-sm" (click)="submitComment()" [disabled]="!newCommentText()">
+                      Post Comment
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Comments list -->
+                <div class="comments-list mt-md">
+                  @for (comment of comments(); track comment.id) {
+                    <div class="comment-item">
+                      <div class="comment-avatar">
+                        {{ comment.avatarInitials }}
+                      </div>
+                      <div class="comment-content">
+                        <div class="comment-meta">
+                          <span class="comment-user">{{ comment.user }}</span>
+                          <span class="comment-time">{{ comment.time }}</span>
+                        </div>
+                        <p class="comment-text-body">{{ comment.text }}</p>
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Right Column: Sidebar Lesson Index -->
+        <div class="sidebar-panel">
+          <div class="card lessons-index-card">
+            <h3>Course Index</h3>
+            <p class="text-muted font-sm">{{ c.lessonsCompleted }} of {{ c.totalLessons }} completed</p>
+
+            <div class="index-list mt-md">
+              @for (lesson of c.lessons; track lesson.id; let idx = $index) {
+                <a 
+                  [routerLink]="['/lesson', lesson.id]" 
+                  class="index-item-link"
+                  [class.active]="lesson.id === l.id"
+                >
+                  <div class="index-item">
+                    <div class="index-left">
+                      <!-- Status circle -->
+                      <div class="index-status" [class.completed]="lesson.completed">
+                        @if (lesson.completed) {
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                        } @else {
+                          <span>{{ idx + 1 }}</span>
+                        }
+                      </div>
+                      <span class="index-title">{{ lesson.title }}</span>
+                    </div>
+                    <span class="index-duration">{{ lesson.duration }}</span>
+                  </div>
+                </a>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  }
+</div>

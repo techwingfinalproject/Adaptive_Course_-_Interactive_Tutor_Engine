@@ -1,0 +1,27 @@
+<div class="dashboard-header">
+  <h1>System Administration</h1>
+  <p class="subtitle">Welcome, {{ adminName }}! Monitor and manage the platform here.</p>
+</div>
+
+<div class="dashboard-grid">
+  <!-- Manage Users -->
+  <div class="dashboard-card glass-panel">
+    <h3><mat-icon>manage_accounts</mat-icon> User Management</h3>
+    <p>Add new teachers, view all students, and manage platform access.</p>
+    <button mat-raised-button color="primary" routerLink="/admin/users">Manage Users</button>
+  </div>
+
+  <!-- System Analytics -->
+  <div class="dashboard-card glass-panel">
+    <h3><mat-icon>insights</mat-icon> Platform Analytics</h3>
+    <p>View total enrollments, active courses, and system health.</p>
+    <button mat-stroked-button color="primary">View Reports</button>
+  </div>
+  
+  <!-- System Settings -->
+  <div class="dashboard-card glass-panel">
+    <h3><mat-icon>settings_suggest</mat-icon> Global Settings</h3>
+    <p>Configure platform rules and integrations.</p>
+    <button mat-stroked-button color="accent">Open Settings</button>
+  </div>
+</div>

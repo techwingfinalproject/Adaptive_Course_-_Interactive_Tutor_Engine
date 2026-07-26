@@ -1,0 +1,164 @@
+<div class="settings-container animate-fade-in">
+  @if (successMessage()) {
+    <div class="alert alert-success animate-fade-in">
+      {{ successMessage() }}
+    </div>
+  }
+  @if (errorMessage()) {
+    <div class="alert alert-error animate-fade-in">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  <div class="settings-layout-grid">
+    <!-- Left Panel: General & Notifications -->
+    <div class="main-settings-panel">
+      <!-- General Settings -->
+      <div class="card settings-card">
+        <h3 class="card-title">General Settings</h3>
+        
+        <div class="settings-form mt-md">
+          <!-- Theme selector -->
+          <div class="setting-item">
+            <div class="setting-info">
+              <span class="setting-label">Interface Theme</span>
+              <span class="setting-desc font-sm">Choose light or dark mode.</span>
+            </div>
+            <div class="theme-picker-row">
+              <button 
+                class="theme-btn light" 
+                [class.active]="theme() === 'light'"
+                (click)="setTheme('light')"
+              >
+                Light
+              </button>
+              <button 
+                class="theme-btn dark" 
+                [class.active]="theme() === 'dark'"
+                (click)="setTheme('dark')"
+              >
+                Dark
+              </button>
+            </div>
+          </div>
+
+          <!-- Language selector -->
+          <div class="setting-item border-top mt-md pt-md">
+            <div class="setting-info">
+              <span class="setting-label">Primary Language</span>
+              <span class="setting-desc font-sm">System interface language.</span>
+            </div>
+            <select class="form-input language-select" [(ngModel)]="language">
+              <option value="en">English (US)</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="hi">Hindi</option>
+            </select>
+          </div>
+
+          <!-- Privacy switch -->
+          <div class="setting-item border-top mt-md pt-md">
+            <div class="setting-info">
+              <span class="setting-label">Public Profile Visibility</span>
+              <span class="setting-desc font-sm">Allow other students to search for your profile.</span>
+            </div>
+            <div class="switch-wrapper">
+              <input id="privacy-switch" type="checkbox" class="switch-input" [(ngModel)]="isPublicProfile" />
+              <label for="privacy-switch" class="switch-label"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notification Settings -->
+      <div class="card settings-card mt-md">
+        <h3 class="card-title">Notification Settings</h3>
+        <p class="text-muted font-sm mt-xs">Manage system notification preferences.</p>
+
+        <div class="settings-form mt-md">
+          <!-- Email alerts -->
+          <div class="setting-item">
+            <div class="setting-info">
+              <span class="setting-label">Email Notifications</span>
+              <span class="setting-desc font-sm">Receive general summary emails regarding learning stats.</span>
+            </div>
+            <div class="switch-wrapper">
+              <input id="email-switch" type="checkbox" class="switch-input" [(ngModel)]="emailNotif" />
+              <label for="email-switch" class="switch-label"></label>
+            </div>
+          </div>
+
+          <!-- Quiz alerts -->
+          <div class="setting-item border-top mt-md pt-md">
+            <div class="setting-info">
+              <span class="setting-label">Quiz Reminders</span>
+              <span class="setting-desc font-sm">Receive reminder alerts about outstanding course quizzes.</span>
+            </div>
+            <div class="switch-wrapper">
+              <input id="quiz-switch" type="checkbox" class="switch-input" [(ngModel)]="quizNotif" />
+              <label for="quiz-switch" class="switch-label"></label>
+            </div>
+          </div>
+
+          <!-- AI reports -->
+          <div class="setting-item border-top mt-md pt-md">
+            <div class="setting-info">
+              <span class="setting-label">AI Analysis Reports</span>
+              <span class="setting-desc font-sm">Receive monthly automated weak topic recommendations.</span>
+            </div>
+            <div class="switch-wrapper">
+              <input id="report-switch" type="checkbox" class="switch-input" [(ngModel)]="aiReports" />
+              <label for="report-switch" class="switch-label"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-actions border-top-dashed mt-md pt-md">
+          <button class="btn btn-primary font-sm" (click)="saveGeneralSettings()">
+            Save Settings
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel: Security & Logout -->
+    <div class="side-settings-panel">
+      <!-- Change Password -->
+      <div class="card settings-card">
+        <h3 class="card-title">Security Settings</h3>
+        <p class="text-muted font-sm mt-xs">Update your account password regularly.</p>
+
+        <div class="security-form mt-md">
+          <div class="form-group">
+            <label class="form-label">Current Password</label>
+            <input type="password" class="form-input" placeholder="••••••••" [(ngModel)]="currentPassword" />
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">New Password</label>
+            <input type="password" class="form-input" placeholder="••••••••" [(ngModel)]="newPassword" />
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Confirm New Password</label>
+            <input type="password" class="form-input" placeholder="••••••••" [(ngModel)]="confirmNewPassword" />
+          </div>
+
+          <button class="btn btn-primary w-100 mt-sm" (click)="changePassword()">
+            Change Password
+          </button>
+        </div>
+      </div>
+
+      <!-- Logout Card -->
+      <div class="card settings-card logout-card mt-md">
+        <h3 class="card-title">Sign Out</h3>
+        <p class="text-muted font-sm mt-xs">Safely sign out from Adaptive Tutor Engine.</p>
+        
+        <button class="btn btn-danger w-100 mt-md" (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

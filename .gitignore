@@ -1,0 +1,9 @@
+# Ignore everything in the workspace root by default
+/*
+
+# Allow only the 3 component folders and documentation
+!/.gitignore
+!/README.md
+!/adaptive_course_front_end/
+!/adaptive_course_backend/
+!/genaipart/

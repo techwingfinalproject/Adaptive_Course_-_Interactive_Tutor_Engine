@@ -1,0 +1,45 @@
+<div class="login-wrapper">
+  <div class="login-container glass-panel">
+    <div class="login-header">
+      <h2>Student Registration</h2>
+      <p class="subtitle">Create an account to start learning</p>
+    </div>
+    
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+    
+    <form (ngSubmit)="register()" class="login-form">
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" [(ngModel)]="studentData.fullName" name="fullName" class="input-field" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="studentData.email" name="email" class="input-field" placeholder="Enter your email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" [(ngModel)]="studentData.password" name="password" class="input-field" placeholder="Create a password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" [(ngModel)]="studentData.phone" name="phone" class="input-field" placeholder="Enter your phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="batch">Batch / Class</label>
+        <input type="text" id="batch" [(ngModel)]="studentData.batch" name="batch" class="input-field" placeholder="e.g., 2024-A" required>
+      </div>
+      
+      <button type="submit" class="btn-primary login-btn">Register</button>
+    </form>
+    
+    <div class="login-footer">
+      <p>Already have an account? <a routerLink="/login">Login here</a></p>
+    </div>
+  </div>
+</div>

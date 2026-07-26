@@ -1,0 +1,129 @@
+<div class="material-container animate-fade-in">
+  <!-- Back Link Header -->
+  <div class="material-header">
+    <a routerLink="/ai-tutor" class="back-link">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to AI Tutor
+    </a>
+  </div>
+
+  <div class="material-layout-grid">
+    <!-- Left Panel: Core Study Guide -->
+    <div class="main-material-panel">
+      <div class="card explanation-card">
+        <span class="badge badge-warning">AI Generated Study Material</span>
+        <h2 class="topic-title mt-sm">Understanding 3NF with Easy Explanation</h2>
+        
+        <p class="topic-intro mt-md">
+          <strong>Third Normal Form (3NF)</strong> eliminates <em>transitive dependencies</em>. A database schema is in 3NF if it satisfies the following two conditions:
+        </p>
+        <ul class="bullet-list mt-sm">
+          <li>The relation is already in Second Normal Form (2NF).</li>
+          <li>No non-prime (non-key) attribute is transitively dependent on the primary key.</li>
+        </ul>
+
+        <div class="math-block mt-md">
+          <p class="font-semibold">Formal Definition:</p>
+          <p class="math-expr">
+            For every non-trivial functional dependency \(X \rightarrow Y\) in R, either:<br/>
+            1. \(X\) is a super key, OR<br/>
+            2. \(Y\) is a prime attribute (part of a candidate key).
+          </p>
+        </div>
+
+        <h3 class="mt-lg">Case Study Example</h3>
+        <p class="mt-xs text-muted">Consider a flat table: <code>Student(StudentID, StudentName, DeptID, DeptName, DeptHead)</code></p>
+        
+        <div class="example-box mt-md">
+          <p class="font-semibold">Functional Dependencies present:</p>
+          <ul class="bullet-list mt-xs">
+            <li><code>StudentID → StudentName, DeptID</code></li>
+            <li><code>DeptID → DeptName, DeptHead</code></li>
+          </ul>
+          
+          <p class="mt-sm leading-relaxed">
+            Here, <code>StudentID</code> is the primary key. <code>DeptName</code> and <code>DeptHead</code> are non-key columns.
+            Note that <code>StudentID → DeptID</code> and <code>DeptID → DeptHead</code>. Thus, <code>StudentID</code> transitively determines <code>DeptHead</code> through <code>DeptID</code>.
+            This is a <strong>transitive dependency</strong> and violates 3NF!
+          </p>
+
+          <p class="font-semibold mt-md">How to decompose to 3NF:</p>
+          <p class="leading-relaxed">
+            We split the table into two separate tables, separating the transitive relation:
+          </p>
+          <ul class="bullet-list mt-xs">
+            <li><code>StudentTable(StudentID, StudentName, DeptID)</code></li>
+            <li><code>DepartmentTable(DeptID, DeptName, DeptHead)</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Key Points Card -->
+      <div class="card key-points-card mt-md">
+        <h3 class="card-title">Key Points Summary</h3>
+        <ul class="bullet-list mt-md">
+          <li><strong>2NF vs 3NF:</strong> 2NF removes partial dependencies (non-key depending on part of a composite key). 3NF removes transitive dependencies (non-key depending on another non-key).</li>
+          <li><strong>Transitivity:</strong> Denoted as \(A \rightarrow B \rightarrow C\), meaning \(A\) determines \(C\) indirectly through \(B\).</li>
+          <li><strong>BCNF comparison:</strong> BCNF is stricter. It does NOT allow the second condition of 3NF (which allows \(Y\) to be a prime attribute).</li>
+        </ul>
+      </div>
+
+      <!-- Generate questions block -->
+      <div class="mt-lg">
+        @if (!showPracticeQuestions()) {
+          <button (click)="generateQuestions()" class="btn btn-primary w-100 py-md shadow-cta">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Generate Practice Questions
+          </button>
+        } @else {
+          <!-- Generated Questions Accordion list -->
+          <div class="generated-questions-section animate-fade-in">
+            <h3 class="section-title">AI Generated Practice Questions</h3>
+            
+            <div class="questions-accordion mt-md">
+              @for (item of generatedQuestions; track item.id) {
+                <div class="card q-acc-card mb-md">
+                  <div class="q-acc-header">
+                    <span class="q-badge">Question {{ item.id }}</span>
+                    <button class="btn btn-secondary font-sm py-xs" (click)="toggleSolution(item.id)">
+                      {{ showQuestionSolution()[item.id] ? 'Hide Solution' : 'Reveal Solution' }}
+                    </button>
+                  </div>
+                  
+                  <p class="q-text mt-sm">{{ item.question }}</p>
+                  
+                  @if (showQuestionSolution()[item.id]) {
+                    <div class="q-sol-block mt-md animate-fade-in">
+                      <span class="sol-badge">Answer Explanation:</span>
+                      <p class="sol-text mt-xs">{{ item.answer }}</p>
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Right Panel: Related Resources -->
+    <div class="side-material-panel">
+      <div class="card resources-sidebar-card">
+        <h3 class="card-title">Related Resources</h3>
+        <p class="text-muted font-sm mt-xs">Curated reference guides.</p>
+        
+        <div class="resource-links mt-md">
+          @for (res of resources; track res.name) {
+            <div class="res-row">
+              <div class="res-left">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span class="res-title-text">{{ res.name }}</span>
+              </div>
+              <button class="btn-text font-sm">{{ res.action }}</button>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

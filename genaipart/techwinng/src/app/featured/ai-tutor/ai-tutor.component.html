@@ -1,0 +1,146 @@
+<div class="ai-tutor-container animate-fade-in">
+  <div class="ai-layout-grid">
+    <!-- Left Column: Tutor Profile, Weak Topics, & Actions -->
+    <div class="tutor-sidebar-panel">
+      <!-- Profile Card -->
+      <div class="card tutor-card">
+        <div class="tutor-header">
+          <!-- Inline Robot SVG -->
+          <div class="tutor-avatar">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" width="60" height="60">
+              <circle cx="50" cy="50" r="45" fill="var(--color-primary-light)" />
+              <rect x="25" y="38" width="50" height="34" rx="8" fill="var(--color-primary)" />
+              <rect x="32" y="44" width="36" height="20" rx="4" fill="#FFFFFF" />
+              <circle cx="41" cy="54" r="3.5" fill="var(--color-primary)" />
+              <circle cx="59" cy="54" r="3.5" fill="var(--color-primary)" />
+              <path d="M45 59 H55" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round" />
+              <!-- Antenna -->
+              <circle cx="50" cy="27" r="3.5" fill="var(--color-warning)" />
+              <line x1="50" y1="30" x2="50" y2="38" stroke="var(--color-primary)" stroke-width="2.5" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="tutor-name">Dexter AI</h3>
+            <span class="tutor-title">Personal Adaptive Coach</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Weak Topics Card -->
+      <div class="card weak-topics-card mt-md">
+        <h3 class="card-title">Weak Topics Analysis</h3>
+        <p class="text-muted font-sm mt-xs">Identified based on recent quiz scores.</p>
+        
+        <div class="topics-list mt-md">
+          @for (topic of aiTutorService.weakTopics(); track topic.id) {
+            <div class="weak-topic-item">
+              <div class="wt-info">
+                <span class="wt-name">{{ topic.name }}</span>
+                <span class="wt-sub">{{ topic.subtopics }}</span>
+              </div>
+              <span 
+                class="badge"
+                [class.badge-error]="topic.confidence === 'Low'"
+                [class.badge-warning]="topic.confidence === 'Medium'"
+                [class.badge-primary]="topic.confidence === 'High'"
+              >
+                Confidence: {{ topic.confidence }}
+              </span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Actions Grid -->
+      <div class="card actions-card mt-md">
+        <h3 class="card-title">Learning Tools</h3>
+        <div class="actions-buttons-grid mt-md">
+          <a routerLink="/study-material" class="btn btn-secondary action-btn-full">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3.5A2.5 2.5 0 0 1 6.5 1H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+            Get Study Material
+          </a>
+          
+          <button (click)="activeTab.set('Questions')" class="btn btn-secondary action-btn-full" [class.active-btn]="activeTab() === 'Questions'">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            Practice Questions
+          </button>
+          
+          <a routerLink="/quiz/dbms_norm" class="btn btn-primary action-btn-full">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Take a Mini Quiz
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Interactive Chat / Practice Questions -->
+    <div class="main-tutor-panel">
+      <!-- Tabs header -->
+      <div class="tutor-panel-tabs">
+        <button class="panel-tab-btn" [class.active]="activeTab() === 'Chat'" (click)="activeTab.set('Chat')">Chat with Coach</button>
+        <button class="panel-tab-btn" [class.active]="activeTab() === 'Questions'" (click)="activeTab.set('Questions')">Practice Board</button>
+      </div>
+
+      <!-- Chat Board -->
+      @if (activeTab() === 'Chat') {
+        <div class="card chat-card mt-xs">
+          <div class="chat-header">
+            <h4>Live Study Session</h4>
+            <button (click)="clearChat()" class="btn-text font-sm">Clear Chat</button>
+          </div>
+
+          <!-- Message list -->
+          <div #chatContainer class="chat-messages-container">
+            @for (msg of aiTutorService.messages(); track msg.timestamp) {
+              <div class="chat-bubble-row" [class.user]="msg.sender === 'user'">
+                <div class="chat-bubble">
+                  <p class="bubble-text">{{ msg.text }}</p>
+                  <span class="bubble-time">{{ msg.timestamp | date:'shortTime' }}</span>
+                </div>
+              </div>
+            }
+          </div>
+
+          <!-- Bottom Chat Inputs -->
+          <div class="chat-input-bar">
+            <input 
+              type="text" 
+              class="form-input chat-input-field" 
+              placeholder="Ask Dexter AI a question... (e.g. 'Explain 3NF' or 'What is a transitive dependency?')"
+              [(ngModel)]="chatInput"
+              (keyup.enter)="sendMessage()"
+            />
+            <button class="btn btn-primary send-btn" (click)="sendMessage()" [disabled]="!chatInput()">
+              Send
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- Practice Questions Board -->
+      @if (activeTab() === 'Questions') {
+        <div class="practice-board-container mt-xs">
+          @for (item of practiceQuestions; track item.id) {
+            <div class="card practice-question-card animate-fade-in mb-md">
+              <span class="badge badge-primary">Practice Question {{ item.id }}</span>
+              <p class="q-text mt-sm">{{ item.question }}</p>
+              
+              <div class="sol-action mt-md">
+                <button class="btn btn-secondary font-sm" (click)="toggleSolution(item.id)">
+                  {{ showSolution()[item.id] ? 'Hide Solution' : 'View Solution' }}
+                </button>
+              </div>
+
+              @if (showSolution()[item.id]) {
+                <div class="solution-block mt-md animate-fade-in">
+                  <h4>Recommended Solution:</h4>
+                  <p class="sol-text mt-xs">{{ item.solution }}</p>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

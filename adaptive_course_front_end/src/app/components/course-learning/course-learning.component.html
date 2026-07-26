@@ -1,0 +1,40 @@
+<div class="learning-layout">
+  <!-- Sidebar -->
+  <aside class="lesson-sidebar glass-panel">
+    <h3>Course Contents</h3>
+    <ul class="lesson-list">
+      <li *ngFor="let lesson of lessons" 
+          (click)="selectLesson(lesson)"
+          [class.active]="selectedLesson?.lessonId === lesson.lessonId">
+        <span class="lesson-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+        </span>
+        {{ lesson.lessonTitle }}
+      </li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="lesson-content glass-panel" *ngIf="selectedLesson">
+    <div class="lesson-header">
+      <h2>{{ selectedLesson.lessonTitle }}</h2>
+    </div>
+    
+    <div class="lesson-body">
+      <div *ngIf="selectedLesson.videoUrl" class="video-container">
+        <!-- Video player placeholder -->
+        <div class="video-placeholder">Video Player ({{selectedLesson.videoUrl}})</div>
+      </div>
+      
+      <div class="content-text">
+        {{ selectedLesson.lessonContent }}
+      </div>
+    </div>
+    
+    <div class="lesson-footer">
+      <button class="btn-primary">Mark as Complete</button>
+      <button class="btn-secondary" style="margin-left: 1rem;">Take Quiz</button>
+    </div>
+  </main>
+</div>
+

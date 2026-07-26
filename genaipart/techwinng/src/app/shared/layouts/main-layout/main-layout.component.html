@@ -1,0 +1,170 @@
+<div class="layout-wrapper" (click)="closeOverlays()">
+  <!-- Desktop Sidebar -->
+  <aside 
+    class="sidebar" 
+    [class.collapsed]="isSidebarCollapsed()"
+    [class.mobile-open]="isMobileDrawerOpen()"
+  >
+    <div class="sidebar-header">
+      <app-logo [size]="isSidebarCollapsed() ? 32 : 36" [showText]="!isSidebarCollapsed()" [darkText]="false"></app-logo>
+      <button class="mobile-close-btn" (click)="toggleMobileDrawer()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+            <span class="nav-label">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/courses" routerLinkActive="active" class="nav-item">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3.5A2.5 2.5 0 0 1 6.5 1H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5z"/></svg>
+            <span class="nav-label">My Courses</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/ai-tutor" routerLinkActive="active" class="nav-item">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <span class="nav-label">AI Tutor</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/profile" routerLinkActive="active" class="nav-item">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span class="nav-label">Profile</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/settings" routerLinkActive="active" class="nav-item">
+            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span class="nav-label">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button (click)="logout()" class="nav-item logout-btn">
+        <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        <span class="nav-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile Overlay -->
+  @if (isMobileDrawerOpen()) {
+    <div class="mobile-overlay" (click)="toggleMobileDrawer()"></div>
+  }
+
+  <!-- Main Body Content -->
+  <div class="main-body" [class.collapsed-sidebar]="isSidebarCollapsed()">
+    <!-- Top Navbar -->
+    <header class="navbar">
+      <div class="navbar-left">
+        <!-- Hamburger for Mobile -->
+        <button class="menu-toggle-btn mobile-only" (click)="toggleMobileDrawer(); $event.stopPropagation()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        </button>
+        <!-- Collapse Toggle for Desktop -->
+        <button class="menu-toggle-btn desktop-only" (click)="toggleSidebar()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            @if (isSidebarCollapsed()) {
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            } @else {
+              <path d="M19 12h-14M12 5l-7 7 7 7"/>
+            }
+          </svg>
+        </button>
+        <h2 class="navbar-title">{{ pageTitle() }}</h2>
+      </div>
+
+      <div class="navbar-right">
+        <!-- Hi Message -->
+        <span class="welcome-text">Hi, {{ authService.currentUser()?.name?.split(' ')?.[0] || 'Student' }}!</span>
+
+        <!-- Notifications -->
+        <div class="navbar-action-wrapper">
+          <button class="navbar-action-btn" (click)="toggleNotifications($event)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            @if (hasUnreadNotifications()) {
+              <span class="notification-badge"></span>
+            }
+          </button>
+
+          <!-- Notification Dropdown -->
+          @if (isNotificationDropdownOpen()) {
+            <div class="dropdown-menu notification-dropdown" (click)="$event.stopPropagation()">
+              <div class="dropdown-header">
+                <h3>Notifications</h3>
+                <button (click)="markAllAsRead()" class="btn-text font-sm">Mark all as read</button>
+              </div>
+              <ul class="dropdown-list">
+                @for (item of notifications(); track item.id) {
+                  <li class="dropdown-item" [class.unread]="item.unread">
+                    <div class="notification-content">
+                      <p>{{ item.text }}</p>
+                      <span class="notification-time">{{ item.time }}</span>
+                    </div>
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+
+        <!-- Profile Avatar Dropdown -->
+        <div class="navbar-action-wrapper">
+          <button class="avatar-btn" (click)="toggleProfileDropdown($event)">
+            <!-- Profile initial avatar if image doesn't exist, but we render a nice initials circle -->
+            <div class="avatar-circle">
+              {{ authService.currentUser()?.name?.[0] || 'S' }}
+            </div>
+          </button>
+
+          @if (isProfileDropdownOpen()) {
+            <div class="dropdown-menu profile-dropdown" (click)="$event.stopPropagation()">
+              <div class="dropdown-header user-header">
+                <div class="avatar-circle large">
+                  {{ authService.currentUser()?.name?.[0] || 'S' }}
+                </div>
+                <div>
+                  <h4 class="user-name">{{ authService.currentUser()?.name }}</h4>
+                  <span class="user-email">{{ authService.currentUser()?.email }}</span>
+                </div>
+              </div>
+              <ul class="dropdown-list border-top">
+                <li>
+                  <a routerLink="/profile" class="dropdown-item link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    My Profile
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/settings" class="dropdown-item link">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    Settings
+                  </a>
+                </li>
+                <li>
+                  <button (click)="logout()" class="dropdown-item link logout border-top-dashed w-100">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          }
+        </div>
+      </div>
+    </header>
+
+    <!-- Scrollable Main Viewport -->
+    <main class="content-container">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+.logo-container {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+  font-weight: 800;
+}
+
+.logo-icon {
+  flex-shrink: 0;
+  transition: transform var(--transition-smooth);
+}
+
+.logo-container:hover .logo-icon {
+  transform: rotate(-5deg) scale(1.05);
+}
+
+.logo-text {
+  font-family: var(--font-family);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #FFFFFF;
+}
+
+.logo-text.dark {
+  color: var(--color-text);
+}
+
+.logo-text-accent {
+  color: var(--color-primary);
+}
+
+.logo-text.dark .logo-text-accent {
+  color: var(--color-primary);
+}
