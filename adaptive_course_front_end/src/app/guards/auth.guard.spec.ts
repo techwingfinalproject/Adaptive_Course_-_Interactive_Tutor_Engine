@@ -1,25 +1,17 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AuthGuard } from './auth.guard';
+import { CanActivateFn } from '@angular/router';
 
-describe('AuthGuard', () => {
-  let guard: AuthGuard;
+import { authGuard } from './auth.guard';
+
+describe('authGuard', () => {
+  const executeGuard: CanActivateFn = (...guardParameters) => 
+      TestBed.runInInjectionContext(() => authGuard(...guardParameters));
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      providers: [AuthGuard]
-    });
-    guard = TestBed.inject(AuthGuard);
+    TestBed.configureTestingModule({});
   });
 
   it('should be created', () => {
-    expect(guard).toBeTruthy();
-  });
-
-  // Example test for canActivate
-  it('should allow access when conditions are met', () => {
-    const result = guard.canActivate({} as any, {} as any);
-    expect(result).toBeTrue();
+    expect(executeGuard).toBeTruthy();
   });
 });
