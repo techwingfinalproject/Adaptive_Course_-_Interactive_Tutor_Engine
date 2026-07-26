@@ -5,11 +5,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
-@ActiveProfiles("test")   // 👈 Add this line
+@ActiveProfiles("test")
 class AdaptiveCourseBackendApplicationTests {
 
     @Test
     void contextLoads() {
-        // This method is intentionally empty. It tests if the application context loads successfully.
+        // Empty test just to check if context loads
     }
 }
