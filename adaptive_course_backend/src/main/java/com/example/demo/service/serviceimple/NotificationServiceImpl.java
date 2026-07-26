@@ -16,6 +16,8 @@ import com.example.demo.service.NotificationService;
 @Service
 public class NotificationServiceImpl implements NotificationService {
 
+    private static final String NOTIFICATION_NOT_FOUND_MSG = "Notification not found";
+
     private final NotificationRepository repository;
 
     public NotificationServiceImpl(NotificationRepository repository) {
@@ -35,7 +37,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public Notification getNotificationById(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Notification not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(NOTIFICATION_NOT_FOUND_MSG));
     }
 
     @Override
@@ -52,7 +54,7 @@ public class NotificationServiceImpl implements NotificationService {
     public Notification updateNotification(Long id, Notification notification) {
 
         Notification existing = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Notification not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(NOTIFICATION_NOT_FOUND_MSG));
 
         existing.setTitle(notification.getTitle());
         existing.setMessage(notification.getMessage());
@@ -65,7 +67,7 @@ public class NotificationServiceImpl implements NotificationService {
     public void deleteNotification(Long id) {
 
         Notification notification = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Notification not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(NOTIFICATION_NOT_FOUND_MSG));
 
         repository.delete(notification);
     }

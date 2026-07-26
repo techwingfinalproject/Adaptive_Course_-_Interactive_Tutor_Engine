@@ -50,6 +50,7 @@ public class Course {
     private Long teacherId;
 
     public Course() {
+        // Default constructor required by JPA/Hibernate for reflection
     }
 
     @PrePersist

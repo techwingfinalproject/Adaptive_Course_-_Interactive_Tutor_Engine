@@ -5,7 +5,6 @@ import com.example.demo.exception.ApiException;
  
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -51,9 +50,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> getAllCourses() {
-        return courseRepository.findAll().stream()
-                
-                .collect(Collectors.toList());
+        return courseRepository.findAll();
     }
 
     @Override
@@ -99,9 +96,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<Course> getCoursesByTeacherEmail(String teacherEmail) {
-        return courseRepository.findByTeacherEmail(teacherEmail).stream()
-                
-                .collect(Collectors.toList());
+        return courseRepository.findByTeacherEmail(teacherEmail);
     }
 
 

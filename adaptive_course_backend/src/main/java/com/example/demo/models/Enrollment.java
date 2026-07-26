@@ -46,6 +46,7 @@ public class Enrollment {
     private Long studentId;
 
     public Enrollment() {
+        // Default constructor required by JPA/Hibernate for reflection
     }
 
     public Long getEnrollmentId() {

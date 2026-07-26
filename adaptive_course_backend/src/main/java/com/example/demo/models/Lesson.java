@@ -40,6 +40,7 @@ public class Lesson {
     private Long courseId;
 
     public Lesson() {
+        // Default constructor required by JPA/Hibernate for reflection
     }
 
     @PrePersist

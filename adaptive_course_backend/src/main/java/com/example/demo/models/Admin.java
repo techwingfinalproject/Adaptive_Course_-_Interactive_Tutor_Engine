@@ -23,6 +23,7 @@ public class Admin {
     private String role = "ADMIN";
 
     public Admin() {
+        // Default constructor required by JPA/Hibernate for reflection
     }
 
     public Admin(String fullName, String email, String password) {

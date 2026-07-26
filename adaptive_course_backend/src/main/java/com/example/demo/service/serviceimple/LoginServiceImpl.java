@@ -25,6 +25,8 @@ public class LoginServiceImpl implements LoginService {
 
 
 
+    private static final String INVALID_PASSWORD_MSG = "Invalid Password";
+
     private final StudentRepository studentRepository;
 
 
@@ -72,7 +74,7 @@ public class LoginServiceImpl implements LoginService {
 
                 return new LoginResponse(
                         false,
-                        "Invalid Password",
+                        INVALID_PASSWORD_MSG,
                         null,
                         null,
                         null,
@@ -124,7 +126,7 @@ public class LoginServiceImpl implements LoginService {
 
                 return new LoginResponse(
                         false,
-                        "Invalid Password",
+                        INVALID_PASSWORD_MSG,
                         null,
                         null,
                         null,
@@ -170,7 +172,7 @@ public class LoginServiceImpl implements LoginService {
 
                 return new LoginResponse(
                         false,
-                        "Invalid Password",
+                        INVALID_PASSWORD_MSG,
                         null,
                         null,
                         null,

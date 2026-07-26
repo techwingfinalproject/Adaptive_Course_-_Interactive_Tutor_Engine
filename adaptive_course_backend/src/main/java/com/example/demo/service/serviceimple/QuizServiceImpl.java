@@ -7,7 +7,6 @@ import com.example.demo.exception.ResourceNotFoundException;
  
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -87,9 +86,7 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public List<Quiz> getQuizzesByLessonId(Long lessonId) {
-        return quizRepository.findByLessonLessonId(lessonId).stream()
-                
-                .collect(Collectors.toList());
+        return quizRepository.findByLessonLessonId(lessonId);
     }
 
     @Override

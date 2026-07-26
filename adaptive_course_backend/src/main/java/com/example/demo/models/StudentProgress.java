@@ -39,6 +39,7 @@ public class StudentProgress {
     }
 
     public StudentProgress() {
+        // Default constructor required by JPA/Hibernate for reflection
     }
 
     public Long getProgressId() {

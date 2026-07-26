@@ -30,6 +30,7 @@ public class QuizResult {
     private LocalDateTime submittedAt;
 
     public QuizResult() {
+        // Default constructor required by JPA/Hibernate for reflection
     }
 
     @PrePersist

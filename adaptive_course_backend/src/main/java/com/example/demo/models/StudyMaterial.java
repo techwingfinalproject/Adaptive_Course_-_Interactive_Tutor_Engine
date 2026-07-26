@@ -40,6 +40,7 @@ public class StudyMaterial {
     private LocalDateTime createdAt;
 
     public StudyMaterial() {
+        // Default constructor required by JPA/Hibernate for reflection
     }
 
     @PrePersist

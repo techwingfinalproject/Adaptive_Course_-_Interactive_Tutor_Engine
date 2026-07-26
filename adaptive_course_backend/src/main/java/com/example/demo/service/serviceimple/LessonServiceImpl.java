@@ -7,7 +7,6 @@ import com.example.demo.exception.ResourceNotFoundException;
  
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -30,8 +29,8 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public Lesson addLesson(Lesson Lesson, String teacherEmail) {
-        Course course = courseRepository.findById(Lesson.getCourseId())
+    public Lesson addLesson(Lesson lessonDto, String teacherEmail) {
+        Course course = courseRepository.findById(lessonDto.getCourseId())
                 .orElseThrow(() -> new ResourceNotFoundException("Course not found"));
         
         if (!course.getTeacher().getEmail().equals(teacherEmail)) {
@@ -39,18 +38,17 @@ public class LessonServiceImpl implements LessonService {
         }
 
         Lesson lesson = new Lesson();
-        lesson.setLessonTitle(Lesson.getLessonTitle());
-        lesson.setLessonContent(Lesson.getLessonContent());
-        lesson.setVideoUrl(Lesson.getVideoUrl());
-        lesson.setLessonOrder(Lesson.getLessonOrder());
+        lesson.setLessonTitle(lessonDto.getLessonTitle());
+        lesson.setLessonContent(lessonDto.getLessonContent());
+        lesson.setVideoUrl(lessonDto.getVideoUrl());
+        lesson.setLessonOrder(lessonDto.getLessonOrder());
         lesson.setCourse(course);
         
-        Lesson savedLesson = lessonRepository.save(lesson);
-        return savedLesson;
+        return lessonRepository.save(lesson);
     }
 
     @Override
-    public Lesson updateLesson(Long id, Lesson Lesson, String teacherEmail) {
+    public Lesson updateLesson(Long id, Lesson lessonDto, String teacherEmail) {
         Lesson lesson = lessonRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Lesson not found"));
         
@@ -58,13 +56,12 @@ public class LessonServiceImpl implements LessonService {
             throw new ApiException("You can only update lessons in your own courses");
         }
 
-        lesson.setLessonTitle(Lesson.getLessonTitle());
-        lesson.setLessonContent(Lesson.getLessonContent());
-        lesson.setVideoUrl(Lesson.getVideoUrl());
-        lesson.setLessonOrder(Lesson.getLessonOrder());
+        lesson.setLessonTitle(lessonDto.getLessonTitle());
+        lesson.setLessonContent(lessonDto.getLessonContent());
+        lesson.setVideoUrl(lessonDto.getVideoUrl());
+        lesson.setLessonOrder(lessonDto.getLessonOrder());
         
-        Lesson updatedLesson = lessonRepository.save(lesson);
-        return updatedLesson;
+        return lessonRepository.save(lesson);
     }
 
     @Override
@@ -81,9 +78,7 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public List<Lesson> getLessonsByCourseId(Long courseId) {
-        return lessonRepository.findByCourseCourseId(courseId).stream()
-                
-                .collect(Collectors.toList());
+        return lessonRepository.findByCourseCourseId(courseId);
     }
 
 

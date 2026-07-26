@@ -43,6 +43,7 @@ public class Teacher {
     private List<Course> courses;
 
     public Teacher() {
+        // Default constructor required by JPA/Hibernate for reflection
     }
 
     @PrePersist

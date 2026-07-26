@@ -8,7 +8,6 @@ import com.example.demo.exception.ResourceNotFoundException;
 
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -53,15 +52,12 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         enrollment.setCourse(course);
         enrollment.setStatus("ACTIVE");
         
-        Enrollment savedEnrollment = enrollmentRepository.save(enrollment);
-        return savedEnrollment;
+        return enrollmentRepository.save(enrollment);
     }
 
     @Override
     public List<Enrollment> getStudentEnrollments(String studentEmail) {
-        return enrollmentRepository.findByStudentEmail(studentEmail).stream()
-                
-                .collect(Collectors.toList());
+        return enrollmentRepository.findByStudentEmail(studentEmail);
     }
 
     @Override
@@ -73,8 +69,6 @@ public class EnrollmentServiceImpl implements EnrollmentService {
             throw new ApiException("You are not authorized to view enrollments for this course");
         }
         
-        return enrollmentRepository.findByCourseCourseId(courseId).stream()
-                
-                .collect(Collectors.toList());
+        return enrollmentRepository.findByCourseCourseId(courseId);
     }
 }

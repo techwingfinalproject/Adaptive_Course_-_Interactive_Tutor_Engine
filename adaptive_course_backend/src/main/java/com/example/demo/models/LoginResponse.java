@@ -12,6 +12,7 @@ public class LoginResponse {
     private String email;
 
     public LoginResponse() {
+        // Default constructor required for JSON serialization/deserialization
     }
 
     public LoginResponse(boolean success,

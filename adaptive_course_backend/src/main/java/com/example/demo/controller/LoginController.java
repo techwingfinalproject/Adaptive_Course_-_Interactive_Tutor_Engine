@@ -20,10 +20,10 @@ public class LoginController {
 
     @PostMapping("/login")
     public org.springframework.http.ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
-        LoginResponse loginResponse = loginService.login(request);
+        LoginResponse response = loginService.login(request);
         return org.springframework.http.ResponseEntity
-                .status(loginResponse.isSuccess() ? 200 : 401)
-                .body(loginResponse);
+                .status(response.isSuccess() ? 200 : 401)
+                .body(response);
     }
 
 }

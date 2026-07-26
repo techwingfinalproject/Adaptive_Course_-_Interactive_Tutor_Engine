@@ -49,6 +49,7 @@ public class Student {
     private List<Enrollment> enrollments;
 
     public Student() {
+        // Default constructor required by JPA/Hibernate for reflection
     }
 
     @PrePersist

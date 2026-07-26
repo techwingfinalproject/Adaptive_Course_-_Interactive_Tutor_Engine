@@ -47,6 +47,7 @@ public class Quiz {
     private Long lessonId;
 
     public Quiz() {
+        // Default constructor required by JPA/Hibernate for reflection
     }
 
     @PrePersist

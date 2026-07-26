@@ -36,6 +36,7 @@ public class Notification {
     }
 
     public Notification() {
+        // Default constructor required by JPA/Hibernate for reflection
     }
 
     public Long getNotificationId() {
