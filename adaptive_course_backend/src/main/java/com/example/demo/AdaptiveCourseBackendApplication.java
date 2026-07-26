@@ -1,14 +1,13 @@
 package com.example.demo;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootTest
-class AdaptiveCourseBackendApplicationTests {
+@SpringBootApplication
+public class AdaptiveCourseBackendApplication {
 
-    @Test
-    @Disabled("Skipping until test environment properties are configured")
-    void contextLoads() {
+    public static void main(String[] args) {
+        SpringApplication.run(AdaptiveCourseBackendApplication.class, args);
     }
+
 }
