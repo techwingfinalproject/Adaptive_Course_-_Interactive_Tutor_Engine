@@ -15,6 +15,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>adaptive_course_backend</artifactId>
+        <packaging>war</packaging> 
     <version>0.0.1-SNAPSHOT</version>
     <name>adaptive_course_backend</name>
     <description>Adaptive Course Backend</description>
