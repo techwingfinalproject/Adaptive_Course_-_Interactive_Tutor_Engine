@@ -79,7 +79,7 @@ public class AiIntegrationServiceImpl implements AiIntegrationService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(pythonRequest)
                 .retrieve()
-                .body(new ParameterizedTypeReference<Map<String, Object>>() {});
+                .body(Map.class);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class AiIntegrationServiceImpl implements AiIntegrationService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(request)
                 .retrieve()
-                .body(new ParameterizedTypeReference<Map<String, Object>>() {});
+                .body(Map.class);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class AiIntegrationServiceImpl implements AiIntegrationService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(pythonRequest)
                 .retrieve()
-                .body(new ParameterizedTypeReference<Map<String, Object>>() {});
+                .body(Map.class);
     }
 
     @Override
@@ -135,7 +135,7 @@ public class AiIntegrationServiceImpl implements AiIntegrationService {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(pythonRequest)
                 .retrieve()
-                .body(new ParameterizedTypeReference<Map<String, Object>>() {});
+                .body(Map.class);
     }
 
     @Override

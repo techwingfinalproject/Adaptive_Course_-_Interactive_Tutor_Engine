@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TeacherService {
-  private apiUrl = 'http://localhost:8080/api/teachers';
+  private apiUrl = '/adaptive_course_backend/api/teachers';
 
   constructor(private http: HttpClient) { }
 

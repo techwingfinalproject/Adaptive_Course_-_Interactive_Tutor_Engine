@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class QuizService {
-  private apiUrl = 'http://localhost:8080/api/quizzes';
+  private apiUrl = '/adaptive_course_backend/api/quizzes';
 
   constructor(private http: HttpClient) { }
 

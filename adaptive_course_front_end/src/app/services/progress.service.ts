@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProgressService {
-  private apiUrl = 'http://localhost:8080/api/student-progress';
+  private apiUrl = '/adaptive_course_backend/api/student-progress';
 
   constructor(private http: HttpClient) { }
 
