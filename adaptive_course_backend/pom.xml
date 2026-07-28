@@ -65,11 +65,12 @@
         </dependency>
 
         <!-- Lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
+       <dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.24</version>  <!-- Spring Boot 2.7.18 ki idi correct version -->
+    <scope>provided</scope>
+</dependency>
 
         <!-- JWT -->
         <dependency>
