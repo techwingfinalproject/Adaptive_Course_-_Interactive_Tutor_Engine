@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   registerStudent(studentData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/students/register`, studentData).pipe(
+    return this.http.post(`${this.apiUrl}/register`, studentData).pipe(
       tap((response: any) => {
         if (response && response.token) {
           this.setToken(response.token);
