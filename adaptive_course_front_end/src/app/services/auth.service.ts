@@ -6,7 +6,7 @@ import { Observable, BehaviorSubject, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://13.127.83.187:8080/api'; 
+  private apiUrl = 'http://13.127.83.187:8080/adaptive_course_backend/api'; 
   
   private loggedInSubject = new BehaviorSubject<boolean>(this.isLoggedIn());
   public isLoggedIn$ = this.loggedInSubject.asObservable();
