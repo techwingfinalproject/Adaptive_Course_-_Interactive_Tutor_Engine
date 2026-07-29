@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import java.persistence.*;
+import java.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "courses")
